@@ -1,0 +1,79 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://assets/player/idle/adventurer-idle-01.png" type="Texture" id=1]
+[ext_resource path="res://assets/player/idle/adventurer-idle-02.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/idle/adventurer-idle-00.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/idle/adventurer-idle-03.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/slide/adventurer-slide-01.png" type="Texture" id=5]
+[ext_resource path="res://assets/player/jump/adventurer-jump-03.png" type="Texture" id=6]
+[ext_resource path="res://assets/player/slide/adventurer-slide-00.png" type="Texture" id=7]
+[ext_resource path="res://assets/player/run/adventurer-run-03.png" type="Texture" id=8]
+[ext_resource path="res://assets/player/run/adventurer-run-04.png" type="Texture" id=9]
+[ext_resource path="res://assets/player/run/adventurer-run-01.png" type="Texture" id=10]
+[ext_resource path="res://assets/player/run/adventurer-run-00.png" type="Texture" id=11]
+[ext_resource path="res://assets/player/jump/adventurer-jump-01.png" type="Texture" id=12]
+[ext_resource path="res://assets/player/jump/adventurer-jump-02.png" type="Texture" id=13]
+[ext_resource path="res://assets/player/jump/adventurer-jump-00.png" type="Texture" id=14]
+[ext_resource path="res://assets/player/run/adventurer-run-02.png" type="Texture" id=15]
+[ext_resource path="res://assets/player/run/adventurer-run-05.png" type="Texture" id=16]
+[ext_resource path="res://assets/player/fall/adventurer-fall-01.png" type="Texture" id=17]
+[ext_resource path="res://assets/player/fall/adventurer-fall-00.png" type="Texture" id=18]
+[ext_resource path="res://assets/player/attack/adventurer-attack2-01.png" type="Texture" id=19]
+[ext_resource path="res://assets/player/attack/adventurer-attack2-02.png" type="Texture" id=20]
+[ext_resource path="res://assets/player/attack/adventurer-attack2-03.png" type="Texture" id=21]
+[ext_resource path="res://assets/player/attack/adventurer-attack2-05.png" type="Texture" id=22]
+[ext_resource path="res://assets/player/attack/adventurer-attack2-00.png" type="Texture" id=23]
+[ext_resource path="res://assets/player/attack/adventurer-attack2-04.png" type="Texture" id=24]
+[ext_resource path="res://scripts/Player.gd" type="Script" id=25]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 24.0657
+height = 43.5784
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 15 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "Run",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 17 ) ],
+"loop": false,
+"name": "Fall",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 23 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 24 ), ExtResource( 22 ) ],
+"loop": false,
+"name": "Attack",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 5 ) ],
+"loop": false,
+"name": "Slide",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "Jump",
+"speed": 8.0
+} ]
+
+[node name="Player" type="Node2D"]
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+script = ExtResource( 25 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 0, 12 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
+scale = Vector2( 3, 3 )
+frames = SubResource( 2 )
+animation = "Idle"
+playing = true
