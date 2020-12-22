@@ -4,7 +4,7 @@ var velocity = Vector2()
 
 var enterState := true
 var currentState := 0
-enum {IDLE, ATTACK, RUN, JUMP, FALL, SLIDE}
+enum {IDLE, ATTACK, RUN, JUMP, FALL, SLIDE, ATTACK2, ATTACK3}
 
 func _physics_process(delta):
 	match currentState:
@@ -20,6 +20,10 @@ func _physics_process(delta):
 			_fallState(delta)
 		SLIDE:
 			_slideState(delta)
+		ATTACK2:
+			_attack2State(delta)
+		ATTACK3:
+			_attack3State(delta)
 			
 # CHECK FUNCTIONS
 func _checkIdleState():
@@ -36,7 +40,23 @@ func _checkIdleState():
 
 func _checkAttackState():
 	var newState = currentState
-	if $AnimatedSprite.animation == "Attack":
+	if $AnimatedSprite.animation == "Attack" and Input.is_action_pressed("ui_space"):
+		newState = ATTACK2
+	elif $AnimatedSprite.animation == "Attack":
+		newState = IDLE
+	return newState
+	
+func _checkAttack2State():
+	var newState = currentState
+	if $AnimatedSprite.animation == "Attack2" and Input.is_action_pressed("ui_space"):
+		newState = ATTACK3
+	elif $AnimatedSprite.animation == "Attack2":
+		newState = IDLE
+	return newState
+	
+func _checkAttack3State():
+	var newState = currentState
+	if $AnimatedSprite.animation == "Attack3":
 		newState = IDLE
 	return newState
 	
@@ -94,6 +114,24 @@ func _attackState(_delta):
 	_move_and_slide()
 	yield(get_node("AnimatedSprite"), "animation_finished")
 	_setState(_checkAttackState())
+	
+func _attack2State(_delta):
+	$AnimatedSprite.play("Attack2")
+	_applyGravity(_delta)
+	if is_on_floor():
+		velocity.x = 0
+	_move_and_slide()
+	yield(get_node("AnimatedSprite"), "animation_finished")
+	_setState(_checkAttack2State())
+	
+func _attack3State(_delta):
+	$AnimatedSprite.play("Attack3")
+	_applyGravity(_delta)
+	if is_on_floor():
+		velocity.x = 0
+	_move_and_slide()
+	yield(get_node("AnimatedSprite"), "animation_finished")
+	_setState(_checkAttack3State())
 
 func _runState(_delta):
 	$AnimatedSprite.play("Run")
