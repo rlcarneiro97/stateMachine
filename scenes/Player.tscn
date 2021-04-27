@@ -58,24 +58,24 @@ animations = [ {
 "name": "Fall",
 "speed": 8.0
 }, {
-"frames": [ ExtResource( 7 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "Slide",
-"speed": 8.0
-}, {
-"frames": [ ExtResource( 23 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 24 ), ExtResource( 22 ) ],
-"loop": true,
-"name": "Attack",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 14 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 6 ) ],
 "loop": false,
 "name": "Jump",
 "speed": 8.0
 }, {
+"frames": [ ExtResource( 7 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "Slide",
+"speed": 8.0
+}, {
 "frames": [ ExtResource( 34 ), ExtResource( 28 ), ExtResource( 35 ), ExtResource( 30 ), ExtResource( 33 ) ],
 "loop": true,
 "name": "Attack2",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 23 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 24 ), ExtResource( 22 ) ],
+"loop": true,
+"name": "Attack",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 26 ), ExtResource( 27 ), ExtResource( 29 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 36 ) ],
@@ -96,6 +96,6 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 scale = Vector2( 3, 3 )
 frames = SubResource( 2 )
-animation = "Attack3"
-frame = 3
+animation = "Idle"
+frame = 2
 playing = true
